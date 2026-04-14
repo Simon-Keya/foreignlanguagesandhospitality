@@ -1,4 +1,4 @@
-// src/components/common/Footer.tsx
+// src/components/layout/Footer.tsx
 
 import Link from 'next/link';
 

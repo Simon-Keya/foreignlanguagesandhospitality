@@ -1,16 +1,31 @@
 // src/app/layout.tsx
 
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
-import WhatsAppButton from '@/components/layout/WhatsAppButton';
 import type { Metadata } from 'next';
 import './globals.css';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'IIFLHM - International Institute of Foreign Languages and Hospitality Management',
-  description: 'World-class education in German Language, Hospitality Management & Nursing pathways in Narok, Kenya. Your gateway to careers in Germany, Austria & Switzerland.',
-  icons: {
-    icon: '/favicon.ico',
+  title: {
+    default: SITE_CONFIG.name,
+    template: `%s | ${SITE_CONFIG.shortName}`,
+  },
+  description: SITE_CONFIG.description,
+  keywords: [
+    "International School Kenya", 
+    "German language Narok", 
+    "Ausbildung Germany", 
+    "IIFLHM", 
+    "hospitality management Kenya"
+  ],
+  authors: [{ name: "IIFLHM" }],
+  openGraph: {
+    title: SITE_CONFIG.name,
+    description: SITE_CONFIG.description,
+    images: [{ url: '/images/hero-bg.jpg' }],
+    siteName: SITE_CONFIG.shortName,
   },
 };
 
@@ -21,9 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased bg-white">
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>
