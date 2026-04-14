@@ -1,9 +1,9 @@
-// src/components/common/Navbar.tsx
+// src/components/layout/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
-import Button from './Button';
+import Button from '../common/Button';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
