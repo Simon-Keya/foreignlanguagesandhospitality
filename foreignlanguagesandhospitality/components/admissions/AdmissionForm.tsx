@@ -2,11 +2,11 @@
 
 'use client';
 
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { CheckCircle, Loader2, Send, Upload } from 'lucide-react';
 import { useState } from 'react';
-import { Send, CheckCircle, Loader2, Upload } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 const admissionSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters"),
