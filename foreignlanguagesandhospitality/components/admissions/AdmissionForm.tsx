@@ -1,5 +1,3 @@
-// src/components/admissions/AdmissionForm.tsx
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,20 +18,27 @@ const admissionSchema = z.object({
   motivation: z.string().min(30, "Please tell us why you want to join"),
   preferredIntake: z.string().min(1, "Please select your preferred intake"),
   howDidYouHear: z.string().optional(),
-  // File upload (optional)
-  document: z.any().optional(),
+  document: z.instanceof(File).optional(), // ✅ FIXED
 });
 
 type AdmissionFormData = z.infer<typeof admissionSchema>;
 
 const programs = [
-  "German Language Course", "Diploma in Hospitality Management", 
-  "Diploma in Front Office Operations", "Diploma in House Keeping & Laundry",
-  "Diploma in Travel and Tourism Management", "Certificate in Food Production",
-  "Nursing Career Preparation", "Other"
+  "German Language Course",
+  "Diploma in Hospitality Management",
+  "Diploma in Front Office Operations",
+  "Diploma in House Keeping & Laundry",
+  "Diploma in Travel and Tourism Management",
+  "Certificate in Food Production",
+  "Nursing Career Preparation",
+  "Other",
 ];
 
-const intakes = ["June 2025 Intake", "September 2025 Intake", "January 2026 Intake"];
+const intakes = [
+  "June 2025 Intake",
+  "September 2025 Intake",
+  "January 2026 Intake",
+];
 
 export default function AdmissionForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,31 +77,38 @@ export default function AdmissionForm() {
       if (!endpoint) throw new Error("Formspree endpoint not configured");
 
       const formData = new FormData();
+
       Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value as string);
+        if (value && key !== "document") {
+          formData.append(key, value as string);
+        }
       });
 
-      // Append file if exists
-      const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-      if (fileInput?.files?.[0]) {
-        formData.append("document", fileInput.files[0]);
+      // ✅ Clean file handling (no DOM query)
+      if (data.document instanceof File) {
+        formData.append("document", data.document);
       }
 
       const response = await fetch(endpoint, {
-        method: 'POST',
+        method: "POST",
         body: formData,
       });
 
-      if (response.ok) {
-        setIsSuccess(true);
-        reset();
-        setUploadedFileName(null);
-        setTimeout(() => setIsSuccess(false), 8000);
-      } else {
+      if (!response.ok) {
         throw new Error("Failed to submit");
       }
-    } catch (err: any) {
-      setError(err.message || "Something went wrong. Please try again.");
+
+      setIsSuccess(true);
+      reset();
+      setUploadedFileName(null);
+
+      setTimeout(() => setIsSuccess(false), 8000);
+    } catch (err: unknown) { // ✅ FIXED
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -107,115 +119,203 @@ export default function AdmissionForm() {
       {isSuccess ? (
         <div className="bg-green-50 border border-green-200 rounded-2xl p-12 text-center">
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-6" />
-          <h3 className="text-3xl font-bold text-green-800 mb-3">Application Received!</h3>
-          <p className="text-green-700">Thank you! Our team will contact you within 48 hours.</p>
+          <h3 className="text-3xl font-bold text-green-800 mb-3">
+            Application Received!
+          </h3>
+          <p className="text-green-700">
+            Thank you! Our team will contact you within 48 hours.
+          </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-          {/* Name, Email, Phone */}
+          {/* Name & Phone */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Full Name *</label>
-              <input {...register("fullName")} className="input input-bordered w-full" placeholder="John Doe" />
-              {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>}
+              <label className="block text-sm font-medium mb-2">
+                Full Name *
+              </label>
+              <input
+                {...register("fullName")}
+                className="input input-bordered w-full"
+                placeholder="John Doe"
+              />
+              {errors.fullName && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.fullName.message}
+                </p>
+              )}
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2">Phone Number *</label>
-              <input {...register("phone")} className="input input-bordered w-full" placeholder="+254 700 123 456" />
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
+              <label className="block text-sm font-medium mb-2">
+                Phone Number *
+              </label>
+              <input
+                {...register("phone")}
+                className="input input-bordered w-full"
+                placeholder="+254 700 123 456"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
             </div>
           </div>
 
+          {/* Email */}
           <div>
-            <label className="block text-sm font-medium mb-2">Email Address *</label>
-            <input type="email" {...register("email")} className="input input-bordered w-full" placeholder="your@email.com" />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+            <label className="block text-sm font-medium mb-2">
+              Email Address *
+            </label>
+            <input
+              type="email"
+              {...register("email")}
+              className="input input-bordered w-full"
+              placeholder="your@email.com"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           {/* Program & Intake */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Program *</label>
-              <select {...register("program")} className="select select-bordered w-full">
+              <label className="block text-sm font-medium mb-2">
+                Program *
+              </label>
+              <select
+                {...register("program")}
+                className="select select-bordered w-full"
+              >
                 <option value="">Select Program</option>
-                {programs.map(p => <option key={p} value={p}>{p}</option>)}
+                {programs.map((p) => (
+                  <option key={p} value={p}>
+                    {p}
+                  </option>
+                ))}
               </select>
-              {errors.program && <p className="text-red-500 text-sm mt-1">{errors.program.message}</p>}
+              {errors.program && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.program.message}
+                </p>
+              )}
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2">Preferred Intake *</label>
-              <select {...register("preferredIntake")} className="select select-bordered w-full">
-                {intakes.map(i => <option key={i} value={i}>{i}</option>)}
+              <label className="block text-sm font-medium mb-2">
+                Preferred Intake *
+              </label>
+              <select
+                {...register("preferredIntake")}
+                className="select select-bordered w-full"
+              >
+                {intakes.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          {/* Education & Experience */}
+          {/* Education & Nationality */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Highest Education Level *</label>
-              <select {...register("educationLevel")} className="select select-bordered w-full">
+              <label className="block text-sm font-medium mb-2">
+                Highest Education Level *
+              </label>
+              <select
+                {...register("educationLevel")}
+                className="select select-bordered w-full"
+              >
                 <option value="">Select Level</option>
                 <option value="KCSE">KCSE</option>
                 <option value="Certificate">Certificate</option>
                 <option value="Diploma">Diploma</option>
                 <option value="Degree">Degree</option>
               </select>
+              {errors.educationLevel && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.educationLevel.message}
+                </p>
+              )}
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2">Nationality</label>
-              <input {...register("nationality")} className="input input-bordered w-full" defaultValue="Kenya" />
+              <label className="block text-sm font-medium mb-2">
+                Nationality
+              </label>
+              <input
+                {...register("nationality")}
+                className="input input-bordered w-full"
+              />
             </div>
           </div>
 
           {/* File Upload */}
           <div>
-            <label className="block text-sm font-medium mb-2">Upload Supporting Document (Optional)</label>
+            <label className="block text-sm font-medium mb-2">
+              Upload Supporting Document (Optional)
+            </label>
             <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-base-300 rounded-2xl cursor-pointer hover:border-secondary transition-colors">
               <Upload className="w-8 h-8 text-neutral-400 mb-2" />
-              <span className="text-sm text-neutral-600">Click to upload KCSE certificate, ID, or other documents</span>
-              <input 
-                type="file" 
-                className="hidden" 
+              <span className="text-sm text-neutral-600">
+                Click to upload documents
+              </span>
+              <input
+                type="file"
+                className="hidden"
                 onChange={handleFileChange}
                 accept=".pdf,.jpg,.jpeg,.png"
               />
             </label>
+
             {uploadedFileName && (
-              <p className="text-sm text-green-600 mt-2">✓ Uploaded: {uploadedFileName}</p>
+              <p className="text-sm text-green-600 mt-2">
+                ✓ Uploaded: {uploadedFileName}
+              </p>
             )}
           </div>
 
           {/* Motivation */}
           <div>
-            <label className="block text-sm font-medium mb-2">Why do you want to join IIFLHM? *</label>
-            <textarea 
-              {...register("motivation")} 
-              rows={5} 
-              className="textarea textarea-bordered w-full" 
-              placeholder="Tell us about your goals..."
+            <label className="block text-sm font-medium mb-2">
+              Why do you want to join? *
+            </label>
+            <textarea
+              {...register("motivation")}
+              rows={5}
+              className="textarea textarea-bordered w-full"
             />
-            {errors.motivation && <p className="text-red-500 text-sm mt-1">{errors.motivation.message}</p>}
+            {errors.motivation && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.motivation.message}
+              </p>
+            )}
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn btn-secondary w-full py-4 text-lg flex items-center justify-center gap-3 disabled:opacity-70"
+            className="btn btn-secondary w-full py-4 flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Submitting Application...
+                <Loader2 className="animate-spin" /> Submitting...
               </>
             ) : (
               <>
-                Submit Application <Send className="w-5 h-5" />
+                Submit Application <Send />
               </>
             )}
           </button>
 
-          {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+          {error && <p className="text-red-500 text-center">{error}</p>}
         </form>
       )}
     </>
