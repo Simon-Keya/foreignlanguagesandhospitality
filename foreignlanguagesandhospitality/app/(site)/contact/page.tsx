@@ -1,135 +1,242 @@
-// src/app/(site)/contact/page.tsx
-
-import ContactForm from '@/components/contact/ContactForm';
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
-import { Metadata } from 'next';
+import ContactForm from "@/components/contact/ContactForm";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Contact Us | International Institute of Foreign Languages and Hospitality Management',
-  description: 'Get in touch with us for admissions, program information, or any inquiries. Visit, call, or email the International Institute in Narok, Kenya.',
+  title:
+    "Contact Us | International Institute of Foreign Languages and Hospitality Management",
+  description:
+    "Get in touch with IIFLHM for admissions, program information, or any enquiries. Visit, call, or email us in Narok, Kenya.",
 };
+
+const contactItems = [
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    ),
+    label: "Email Us",
+    lines: [
+      { text: "info@foreignlanguagesandhospitality.com", href: "mailto:info@foreignlanguagesandhospitality.com" },
+      { text: "admissions@foreignlanguagesandhospitality.com", href: "mailto:admissions@foreignlanguagesandhospitality.com" },
+    ],
+    accent: "bg-secondary/10 text-secondary",
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
+      </svg>
+    ),
+    label: "Call Us",
+    lines: [
+      { text: "+254 723 104 680", href: "tel:+254723104680" },
+      { text: "+254 705 704 554", href: "tel:+254705704554" },
+    ],
+    accent: "bg-accent/15 text-accent-dark",
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    ),
+    label: "Visit Us",
+    lines: [
+      { text: "Newline Building, Narok, Kenya", href: null },
+      { text: "Mon–Fri: 8:00 AM – 6:00 PM EAT", href: null },
+    ],
+    accent: "bg-primary/10 text-primary",
+  },
+];
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 16 16" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 8h10M9 4l4 4-4 4" />
+  </svg>
+);
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="bg-primary text-white py-24">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+
+      {/* ── Hero ── */}
+      <div className="relative bg-navy-gradient text-white overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-8 h-px bg-accent" />
+            <span className="text-xs font-bold uppercase tracking-eyebrow text-accent">
+              We&apos;d Love to Hear from You
+            </span>
+            <div className="w-8 h-px bg-accent" />
+          </div>
+
+          <h1 className="font-display text-5xl md:text-6xl font-black text-white leading-tight mb-6">
             Get in Touch
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
-            Have questions about our programs? We&apos;re here to help you take the next step 
-            in your educational journey.
+          <p className="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
+            Have questions about our programs or admissions? Our team in Narok
+            is ready to help you take the next step in your educational journey.
           </p>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-tribar" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-12 gap-12">
-          {/* Contact Information */}
-          <div className="lg:col-span-5 space-y-10">
+      {/* ── Main content ── */}
+      <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-12 gap-14">
+
+          {/* Left — Contact info + map */}
+          <div className="lg:col-span-5 flex flex-col gap-8">
+
+            {/* Section label */}
             <div>
-              <h2 className="text-3xl font-bold text-primary mb-8">Let&apos;s Connect</h2>
-
-              {/* Email */}
-              <div className="flex gap-4 mb-10">
-                <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Mail size={28} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Email Us</h3>
-                  <div className="space-y-2 text-neutral-700">
-                    <a href="mailto:admissions@foreignlanguagesandhospitality.com" className="block hover:text-secondary transition-colors">
-                      admissions@foreignlanguagesandhospitality.com
-                    </a>
-                    <a href="mailto:support@foreignlanguagesandhospitality.com" className="block hover:text-secondary transition-colors">
-                      support@foreignlanguagesandhospitality.com
-                    </a>
-                    <a href="mailto:adminoffice@foreignlanguagesandhospitality.com" className="block hover:text-secondary transition-colors">
-                      adminoffice@foreignlanguagesandhospitality.com
-                    </a>
-                  </div>
-                </div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-px bg-secondary" />
+                <span className="text-xs font-bold uppercase tracking-eyebrow text-secondary">
+                  Contact Information
+                </span>
               </div>
-
-              {/* Phone */}
-              <div className="flex gap-4 mb-10">
-                <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Phone size={28} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Call Us</h3>
-                  <div className="space-y-2">
-                    <a href="tel:+254723104680" className="block hover:text-secondary transition-colors">
-                      +254 723 104 680
-                    </a>
-                    <a href="tel:+254705704554" className="block hover:text-secondary transition-colors">
-                      +254 705 704 554
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Visit Us */}
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <MapPin size={28} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Visit Us</h3>
-                  <p className="text-neutral-700 leading-relaxed">
-                    Newline Building<br />
-                    Narok, Kenya
-                  </p>
-                  <p className="text-sm text-neutral-500 mt-4 flex items-center gap-2">
-                    <Clock size={18} /> Monday - Friday: 8:00 AM - 5:00 PM
-                  </p>
-                </div>
-              </div>
+              <h2 className="text-3xl font-black text-primary leading-tight">
+                Let&apos;s Connect
+              </h2>
+              <p className="text-neutral-500 text-sm mt-2 leading-relaxed">
+                Reach us via any channel below or send a message using the form.
+              </p>
             </div>
 
-            {/* Google Maps Embed */}
-            <div className="mt-12">
-              <h3 className="font-semibold text-lg mb-4">Find Us on Map</h3>
-              <div className="bg-neutral-200 rounded-3xl overflow-hidden h-80">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1598.000000000000!2d35.870000000000!3d-1.080000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMS4wODAwMDAwMDAwMDAwMDA!5e0!3m2!1sen!2ske!4v1710000000000" 
-                  width="100%" 
-                  height="100%" 
+            {/* Contact items */}
+            <div className="flex flex-col gap-5">
+              {contactItems.map(({ icon, label, lines, accent }) => (
+                <div
+                  key={label}
+                  className="group flex items-start gap-4 bg-white rounded-2xl border border-base-300 p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${accent}`}>
+                    {icon}
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-eyebrow text-neutral-400 mb-1">
+                      {label}
+                    </p>
+                    {lines.map(({ text, href }) =>
+                      href ? (
+                        
+                          key={text}
+                          href={href}
+                          className="block text-sm text-neutral-700 hover:text-secondary transition-colors duration-200 font-medium leading-relaxed"
+                        >
+                          {text}
+                        </a>
+                      ) : (
+                        <p key={text} className="text-sm text-neutral-600 leading-snug">
+                          {text}
+                        </p>
+                      )
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* WhatsApp nudge */}
+            
+              href="https://wa.me/254723104680"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 bg-green-50 border border-green-200 rounded-2xl p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-green-800">
+                  Chat on WhatsApp
+                </p>
+                <p className="text-xs text-green-700 mt-0.5">
+                  We reply within minutes · +254 723 104 680
+                </p>
+              </div>
+            </a>
+
+            {/* Google Map */}
+            <div>
+              <p className="text-xs font-black uppercase tracking-eyebrow text-neutral-400 mb-3">
+                Find Us on the Map
+              </p>
+              <div className="rounded-3xl overflow-hidden border border-base-300 shadow-sm h-64">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1598.000000000000!2d35.870000000000!3d-1.080000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMS4wODAwMDAwMDAwMDAwMDA!5e0!3m2!1sen!2ske!4v1710000000000"
+                  width="100%"
+                  height="100%"
                   style={{ border: 0 }}
-                  allowFullScreen 
+                  allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
+                  title="IIFLHM Location — Narok, Kenya"
                 />
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Right — Contact form */}
           <div className="lg:col-span-7">
-            <div className="bg-white border border-base-300 rounded-3xl p-10 md:p-14 shadow-xl">
-              <h2 className="text-3xl font-bold text-primary mb-2">Send us a Message</h2>
-              <p className="text-neutral-600 mb-10">
-                Fill out the form below and our team will get back to you as soon as possible.
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-px bg-secondary" />
+                <span className="text-xs font-bold uppercase tracking-eyebrow text-secondary">
+                  Send a Message
+                </span>
+              </div>
+              <h2 className="text-3xl font-black text-primary leading-tight">
+                How Can We Help?
+              </h2>
+              <p className="text-neutral-500 text-sm mt-2">
+                Fill out the form and our team will get back to you within 24–48 hours.
               </p>
-
-              <ContactForm />
             </div>
+
+            <ContactForm />
           </div>
         </div>
       </div>
 
-      {/* Final CTA */}
-      <div className="bg-base-200 py-16">
-        <div className="max-w-3xl mx-auto text-center px-6">
-          <h2 className="text-3xl font-bold text-primary mb-4">
+      {/* ── Bottom CTA strip ── */}
+      <div className="relative bg-base-200 py-16 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+        <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full border-[32px] border-accent/[0.08] pointer-events-none" />
+
+        <div className="max-w-3xl mx-auto text-center px-6 relative">
+          <h2 className="text-3xl font-black text-primary mb-4 leading-tight">
             We&apos;re Here to Help You Succeed
           </h2>
-          <p className="text-lg text-neutral-600">
-            Whether you have questions about admissions, programs, or career pathways in Germany, 
-            our team is ready to support your journey.
+          <p className="text-neutral-500 text-base leading-relaxed mb-8">
+            Whether you have questions about admissions, programs, or career
+            pathways in Germany — our team is ready to walk the journey with you.
           </p>
+          <Link
+            href="/admissions"
+            className="btn btn-secondary gap-2 font-bold shadow-glow hover:scale-105 transition-transform duration-300"
+          >
+            Start Your Application
+            <ArrowIcon />
+          </Link>
         </div>
       </div>
     </div>

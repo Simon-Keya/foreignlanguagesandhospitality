@@ -1,208 +1,360 @@
-// src/app/(site)/career-opportunities/page.tsx
-
-import SectionTitle from '@/components/common/SectionTitle';
-import { Metadata } from 'next';
+import SectionTitle from "@/components/common/SectionTitle";
+import Link from "next/link";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Career Opportunities in Germany | International Institute of Foreign Languages and Hospitality Management',
-  description: 'Explore apprenticeship programs, undergraduate and master\'s degrees in Germany. Your gateway to international education and career success.',
-  keywords: ['career opportunities Germany', 'Ausbildung Germany', 'study in Germany', 'apprenticeship Kenya', 'German education'],
+  title:
+    "Career Opportunities in Germany | International Institute of Foreign Languages and Hospitality Management",
+  description:
+    "Explore apprenticeship programs, undergraduate and master's degrees in Germany. Your gateway to international education and career success from Narok, Kenya.",
+  keywords: [
+    "career opportunities Germany",
+    "Ausbildung Germany",
+    "study in Germany",
+    "apprenticeship Kenya",
+    "German education Narok",
+  ],
 };
+
+const whyGermany = [
+  {
+    title: "Tuition-Free Education",
+    desc: "Public universities in Germany charge minimal or zero tuition fees — even for international students.",
+  },
+  {
+    title: "Dual Education System",
+    desc: "Earn while you learn through Germany's renowned Ausbildung apprenticeship model.",
+  },
+  {
+    title: "High Demand for Skills",
+    desc: "Germany actively recruits skilled professionals in healthcare, hospitality, and engineering.",
+  },
+  {
+    title: "Post-Study Work Visa",
+    desc: "Graduates can stay up to 18 months to find work after completing their studies.",
+  },
+  {
+    title: "Safe & Welcoming",
+    desc: "Germany is consistently ranked among the safest countries in the world for international students.",
+  },
+  {
+    title: "English-Taught Programs",
+    desc: "Hundreds of programs are taught in English, while learning German opens even more doors.",
+  },
+  {
+    title: "World-Class Universities",
+    desc: "Home to some of the world's best research universities with globally recognized degrees.",
+  },
+  {
+    title: "Strong Kenya–Germany Links",
+    desc: "Growing bilateral ties mean dedicated pathways for Kenyan professionals and students.",
+  },
+];
+
+const pathways = [
+  {
+    number: "01",
+    title: "Apprenticeship Programs",
+    subtitle: "Ausbildung",
+    desc: "Vocational training programs combining classroom learning with on-the-job experience in German companies.",
+    features: [
+      "Dual education system recognized worldwide",
+      "Earn a competitive stipend while training",
+      "Direct pathway to permanent employment",
+      "Requires B1–B2 German language level",
+    ],
+    href: "/career-opportunities/apprenticeship",
+    barColor: "bg-secondary",
+    iconBg: "bg-secondary/10",
+    iconColor: "text-secondary",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    title: "Undergraduate Degrees",
+    subtitle: "Bachelor's Programs",
+    desc: "Bachelor's degree programs at top-ranked German universities and universities of applied sciences.",
+    features: [
+      "Low-cost or tuition-free public universities",
+      "Wide range of English-taught programs",
+      "Learn German alongside your studies",
+      "Access to EU job market on graduation",
+    ],
+    href: "/career-opportunities/undergraduate",
+    barColor: "bg-accent",
+    iconBg: "bg-accent/15",
+    iconColor: "text-accent-dark",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      </svg>
+    ),
+  },
+  {
+    number: "03",
+    title: "Master's Degrees",
+    subtitle: "Postgraduate Programs",
+    desc: "Advanced degree programs designed to enhance your expertise and unlock senior career prospects.",
+    features: [
+      "1–2 year internationally recognized programs",
+      "Research opportunities with leading academics",
+      "Post-study 18-month work visa eligibility",
+      "Pathway to German permanent residency",
+    ],
+    href: "/career-opportunities/masters",
+    barColor: "bg-primary",
+    iconBg: "bg-primary/10",
+    iconColor: "text-primary",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+      </svg>
+    ),
+  },
+];
+
+const CheckIcon = () => (
+  <svg viewBox="0 0 16 16" className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 8l3.5 3.5L13 4" />
+  </svg>
+);
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 16 16" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 8h10M9 4l4 4-4 4" />
+  </svg>
+);
 
 export default function CareerOpportunitiesPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="bg-primary text-white py-24">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+
+      {/* ── Hero ── */}
+      <div className="relative bg-navy-gradient text-white overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full border-[36px] border-accent/[0.05] pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-8 h-px bg-accent" />
+            <span className="text-xs font-bold uppercase tracking-eyebrow text-accent">
+              For High School & University Graduates
+            </span>
+            <div className="w-8 h-px bg-accent" />
+          </div>
+
+          <h1 className="font-display text-5xl md:text-6xl font-black text-white leading-tight mb-3">
             Opportunity Hub
           </h1>
-          <p className="text-2xl md:text-3xl font-light mb-4">
+          <p className="text-2xl font-light text-white/80 mb-6">
             Your Gateway to Germany
           </p>
-          <p className="text-xl max-w-3xl mx-auto opacity-90">
-            For High School Graduates, University Graduates, and Alumni
+          <p className="text-base text-white/65 max-w-2xl mx-auto leading-relaxed mb-12">
+            We guide Kenyan graduates through every step — from language
+            training to Ausbildung placement, undergraduate study, and
+            master's admission in Germany.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-12">
-            <a href="#paths" 
-               className="btn btn-secondary text-lg px-10 py-4">
-              Explore Programs
+          <div className="flex flex-wrap justify-center gap-4">
+            
+              href="#paths"
+              className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
+            >
+              Explore Pathways
+              <ArrowIcon />
             </a>
-            <a href="/contact" 
-               className="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-10 py-4">
+            <Link
+              href="/contact"
+              className="btn btn-lg border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
+            >
               Book Consultation
-            </a>
+            </Link>
           </div>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-tribar" />
       </div>
 
-      {/* Why Germany Section */}
-      <section className="py-20 bg-base-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionTitle 
-            title="Why Germany?" 
-            subtitle="A world-class destination for education and career growth" 
+      {/* ── Why Germany ── */}
+      <section className="py-24 bg-base-200 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#0A2540 1px, transparent 1px), linear-gradient(90deg, #0A2540 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <SectionTitle
+            eyebrow="Why Germany?"
+            title="A World-Class Destination"
+            subtitle="Germany offers some of the best education and career opportunities for African graduates"
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {[
-              "World-class education with internationally recognized universities",
-              "Affordable or tuition-free education at public institutions",
-              "Strong focus on research, innovation, and practical training",
-              "Excellent career prospects and post-study work opportunities",
-              "Safe, welcoming environment for international students",
-              "Diverse range of English-taught programs",
-              "Dual education system (earn while you learn)",
-              "High demand for skilled professionals"
-            ].map((reason, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-base-300 hover:border-secondary transition-colors">
-                <div className="text-4xl mb-4">🇩🇪</div>
-                <p className="text-neutral-700 leading-relaxed">{reason}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
+            {whyGermany.map(({ title, desc }, index) => {
+              const accents = [
+                "border-l-secondary",
+                "border-l-accent",
+                "border-l-primary",
+                "border-l-secondary",
+                "border-l-accent",
+                "border-l-primary",
+                "border-l-secondary",
+                "border-l-accent",
+              ];
+              return (
+                <div
+                  key={index}
+                  className={`group bg-white rounded-2xl border border-base-300 border-l-4 ${accents[index]} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-400 p-6`}
+                >
+                  <h3 className="font-black text-primary text-base leading-snug mb-2">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    {desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Three Pathways ── */}
+      <section id="paths" className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Choose Your Path"
+            title="What We Offer"
+            subtitle="Three proven pathways from Kenya to a career in Germany — we guide you through each one"
+          />
+
+          <div className="grid md:grid-cols-3 gap-6 mt-14">
+            {pathways.map(({ number, title, subtitle, desc, features, href, barColor, iconBg, iconColor, icon }) => (
+              <div
+                key={number}
+                className="group relative bg-white rounded-3xl border border-base-300 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-400 overflow-hidden flex flex-col"
+              >
+                <div className={`h-1.5 w-full ${barColor} rounded-t-3xl`} />
+
+                <div className="p-8 flex flex-col gap-5 flex-1">
+                  {/* Number */}
+                  <span className="text-xs font-black tracking-eyebrow text-neutral-300">
+                    {number}
+                  </span>
+
+                  {/* Icon */}
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${iconBg} ${iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                    {icon}
+                  </div>
+
+                  {/* Title */}
+                  <div>
+                    <p className={`text-xs font-bold uppercase tracking-eyebrow ${iconColor} mb-1`}>
+                      {subtitle}
+                    </p>
+                    <h3 className="text-xl font-black text-primary leading-tight">
+                      {title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    {desc}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="flex flex-col gap-2 flex-1">
+                    {features.map((f) => (
+                      <li key={f} className={`flex items-start gap-2.5 text-xs text-neutral-600 ${iconColor}`}>
+                        <CheckIcon />
+                        <span className="leading-snug text-neutral-700">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="h-px bg-base-300" />
+
+                  <Link
+                    href={href}
+                    className="flex items-center justify-between gap-2 text-sm font-bold text-primary hover:text-secondary transition-colors duration-200 group/link"
+                  >
+                    Explore This Pathway
+                    <span className="w-8 h-8 rounded-full bg-base-200 group-hover/link:bg-secondary group-hover/link:text-white flex items-center justify-center transition-all duration-200">
+                      <ArrowIcon />
+                    </span>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What We Offer */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionTitle 
-            title="What We Offer" 
-            subtitle="Personalized pathways to success in Germany" 
-          />
+      {/* ── Navy CTA ── */}
+      <section className="py-24 bg-navy-gradient text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
 
-          <div className="grid md:grid-cols-3 gap-10 mt-12">
-            {/* Apprenticeship Programs */}
-            <div className="card bg-base-100 border border-base-300 shadow-xl hover:shadow-2xl transition-all">
-              <div className="card-body">
-                <div className="text-5xl mb-6">🔧</div>
-                <h3 className="card-title text-2xl text-primary">Apprenticeship Programs</h3>
-                <p className="text-neutral-600 mt-4">
-                  Vocational training programs that combine classroom learning with on-the-job experience in German companies.
-                </p>
-                <ul className="mt-6 space-y-3 text-sm">
-                  <li className="flex items-start gap-2">✓ Dual education system recognized worldwide</li>
-                  <li className="flex items-start gap-2">✓ Earn while you learn with competitive stipends</li>
-                  <li className="flex items-start gap-2">✓ Direct pathway to employment in Germany</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Undergraduate Degrees */}
-            <div className="card bg-base-100 border border-base-300 shadow-xl hover:shadow-2xl transition-all">
-              <div className="card-body">
-                <div className="text-5xl mb-6">🎓</div>
-                <h3 className="card-title text-2xl text-primary">Undergraduate Degrees</h3>
-                <p className="text-neutral-600 mt-4">
-                  Bachelor&apos;s degree programs at top-ranked German universities and universities of applied sciences.
-                </p>
-                <ul className="mt-6 space-y-3 text-sm">
-                  <li className="flex items-start gap-2">✓ Tuition-free or low-cost education</li>
-                  <li className="flex items-start gap-2">✓ Wide range of English-taught programs</li>
-                  <li className="flex items-start gap-2">✓ Opportunity to learn German alongside studies</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Master&apos;s Degrees */}
-            <div className="card bg-base-100 border border-base-300 shadow-xl hover:shadow-2xl transition-all">
-              <div className="card-body">
-                <div className="text-5xl mb-6">📚</div>
-                <h3 className="card-title text-2xl text-primary">Master&apos;s Degrees</h3>
-                <p className="text-neutral-600 mt-4">
-                  Advanced degree programs designed to enhance your expertise and career prospects.
-                </p>
-                <ul className="mt-6 space-y-3 text-sm">
-                  <li className="flex items-start gap-2">✓ One to two-year internationally recognized programs</li>
-                  <li className="flex items-start gap-2">✓ Research opportunities with leading experts</li>
-                  <li className="flex items-start gap-2">✓ Post-study work visa options</li>
-                </ul>
-              </div>
-            </div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-8 h-px bg-accent" />
+            <span className="text-xs font-bold uppercase tracking-eyebrow text-accent">
+              Take the First Step
+            </span>
+            <div className="w-8 h-px bg-accent" />
           </div>
-        </div>
-      </section>
 
-      {/* Begin Your Journey - Main Paths */}
-      <section id="paths" className="py-20 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionTitle 
-            title="Begin Your Journey" 
-            subtitle="Select your path and take the first step toward your international career"
-            titleClass="text-white"
-            subtitleClass="text-white/80"
-          />
-
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            {/* Apprenticeship Card */}
-            <div className="card bg-white text-neutral-900 shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div className="card-body">
-                <div className="text-6xl mb-6">🔧</div>
-                <h3 className="text-2xl font-bold mb-3">Apprenticeship Programs</h3>
-                <p className="text-neutral-600 mb-8">
-                  Combine work and study in a German company through the renowned dual education system.
-                </p>
-                <a href="/career-opportunities/apprenticeship" 
-                   className="btn btn-secondary w-full">
-                  Explore Apprenticeship Programs
-                </a>
-              </div>
-            </div>
-
-            {/* Undergraduate Card */}
-            <div className="card bg-white text-neutral-900 shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div className="card-body">
-                <div className="text-6xl mb-6">🎓</div>
-                <h3 className="text-2xl font-bold mb-3">Undergraduate Degrees</h3>
-                <p className="text-neutral-600 mb-8">
-                  Pursue a bachelor&apos;s degree at top German universities and universities of applied sciences.
-                </p>
-                <a href="/career-opportunities/undergraduate" 
-                   className="btn btn-secondary w-full">
-                  Explore Bachelor&apos;s Programs
-                </a>
-              </div>
-            </div>
-
-            {/* Master's Card */}
-            <div className="card bg-white text-neutral-900 shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div className="card-body">
-                <div className="text-6xl mb-6">📘</div>
-                <h3 className="text-2xl font-bold mb-3">Master&apos;s Degrees</h3>
-                <p className="text-neutral-600 mb-8">
-                  Advance your education with specialized master&apos;s programs in Germany.
-                </p>
-                <a href="/career-opportunities/masters" 
-                   className="btn btn-secondary w-full">
-                  Explore Master&apos;s Programs
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-primary mb-6">
-            Ready to Transform Your Future?
+          <h2 className="font-display text-4xl md:text-5xl font-black text-white leading-tight mb-6">
+            Ready to Transform<br />
+            <span className="text-accent">Your Future?</span>
           </h2>
-          <p className="text-xl text-neutral-600 mb-10">
-            Book a consultation with our experts to create your personalized pathway to Germany.
+
+          <p className="text-lg text-white/70 leading-relaxed mb-10 max-w-2xl mx-auto">
+            Book a consultation with our career advisors to create a
+            personalised pathway from Narok to Germany — step by step.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/contact" 
-               className="btn btn-secondary btn-lg text-lg px-12">
+            <Link
+              href="/contact"
+              className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
+            >
               Schedule Your Consultation
-            </a>
-            <a href="#paths" 
-               className="btn btn-outline btn-lg text-lg px-12">
-              Select Your Path
+              <ArrowIcon />
+            </Link>
+            
+              href="#paths"
+              className="btn btn-lg border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
+            >
+              Review All Pathways
             </a>
           </div>
         </div>
