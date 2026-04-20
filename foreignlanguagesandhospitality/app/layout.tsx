@@ -1,11 +1,11 @@
 // src/app/layout.tsx
 
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+import WhatsAppFAB from '@/components/layout/WhatsAppFab';
+import { SITE_CONFIG } from '@/lib/constants';
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import WhatsAppButton from '@/components/layout/WhatsAppButton';
-import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: {
@@ -40,7 +40,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <WhatsAppFAB/>
       </body>
     </html>
   );
