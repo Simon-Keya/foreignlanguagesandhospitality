@@ -2,9 +2,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
   theme: {
@@ -176,52 +175,8 @@ const config: Config = {
     },
   },
 
-  plugins: [
-    require("daisyui"),
-    require("@tailwindcss/typography"),
-  ],
-
-  daisyui: {
-    themes: [
-      {
-        institute: {
-          "primary":           "#0A2540",
-          "primary-content":   "#FFFFFF",
-          "secondary":         "#E30613",
-          "secondary-content": "#FFFFFF",
-          "accent":            "#F2C12C",
-          "accent-content":    "#0A2540",
-          "neutral":           "#1F2937",
-          "neutral-content":   "#F9FAFB",
-          "base-100":          "#FFFFFF",
-          "base-200":          "#F1F5F9",
-          "base-300":          "#E2E8F0",
-          "base-content":      "#1F2937",
-          "info":              "#3ABFF8",
-          "info-content":      "#FFFFFF",
-          "success":           "#36D399",
-          "success-content":   "#FFFFFF",
-          "warning":           "#F2C12C",
-          "warning-content":   "#0A2540",
-          "error":             "#E30613",
-          "error-content":     "#FFFFFF",
-
-          "--rounded-box":     "1rem",
-          "--rounded-btn":     "0.5rem",
-          "--rounded-badge":   "1.9rem",
-          "--animation-btn":   "0.2s",
-          "--animation-input": "0.2s",
-          "--btn-focus-scale": "0.97",
-          "--border-btn":      "1px",
-          "--tab-radius":      "0.5rem",
-        },
-      },
-    ],
-    base:   true,
-    styled: true,
-    utils:  true,
-    logs:   false,
-  },
+  plugins: [],
 };
 
 export default config;
+
