@@ -21,7 +21,7 @@ const programs = [
 const contactItems = [
   {
     icon: (
-      <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+  <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
         <circle cx="12" cy="10" r="3" />
       </svg>
@@ -108,8 +108,8 @@ export default function Footer() {
       />
 
       {/* Decorative rings */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full border-[48px] border-white/[0.03] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full border-[32px] border-accent/[0.06] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 rounded-full border-12 border-white/3 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full border-8 border-accent/6 -translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8 relative">
 
@@ -144,7 +144,7 @@ export default function Footer() {
               </p>
               <div className="flex gap-2">
                 {socials.map(({ label, href, icon }) => (
-                  
+                  <a
                     key={label}
                     href={href}
                     target="_blank"
@@ -208,7 +208,7 @@ export default function Footer() {
               {contactItems.map(({ icon, label, href }) => (
                 <li key={label}>
                   {href ? (
-                    
+                    <a
                       href={href}
                       className="flex items-start gap-3 text-sm text-white/65 hover:text-white transition-colors duration-200 group"
                     >

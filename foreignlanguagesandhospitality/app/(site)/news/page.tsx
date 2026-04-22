@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/common/SectionTitle";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "News & Updates | International Institute of Foreign Languages and Hospitality Management",
@@ -96,7 +96,7 @@ export default function NewsPage() {
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-12 border-white/4 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -115,9 +115,9 @@ export default function NewsPage() {
             in our hospitality education community.
           </p>
 
-          
+          <a
             href="#newsletter"
-            className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
+            className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300 inline-block mx-auto"
           >
             Subscribe to Updates
             <ArrowIcon />
@@ -186,7 +186,7 @@ export default function NewsPage() {
       {/* ── Video — Meet Our Staff ── */}
       <section className="py-24 bg-base-200 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full border-[40px] border-primary/[0.04] pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full border-10 border-primary/4 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -360,7 +360,7 @@ export default function NewsPage() {
               placeholder="Enter your email address"
               className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-accent focus:bg-white/15 transition-all duration-200"
             />
-            <button className="btn btn-secondary px-6 font-bold flex-shrink-0">
+            <button className="btn btn-secondary px-6 font-bold shrink-0">
               Subscribe
             </button>
           </div>

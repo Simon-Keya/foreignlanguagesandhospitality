@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/common/SectionTitle";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
@@ -120,7 +120,7 @@ const pathways = [
 ];
 
 const CheckIcon = () => (
-  <svg viewBox="0 0 16 16" className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+  <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 8l3.5 3.5L13 4" />
   </svg>
 );
@@ -145,14 +145,14 @@ export default function CareerOpportunitiesPage() {
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full border-[36px] border-accent/[0.05] pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-12 border-white/4 pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full border-9 border-accent/5 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-8 h-px bg-accent" />
             <span className="text-xs font-bold uppercase tracking-eyebrow text-accent">
-              For High School & University Graduates
+              For High School and University Graduates
             </span>
             <div className="w-8 h-px bg-accent" />
           </div>
@@ -166,24 +166,24 @@ export default function CareerOpportunitiesPage() {
           <p className="text-base text-white/65 max-w-2xl mx-auto leading-relaxed mb-12">
             We guide Kenyan graduates through every step — from language
             training to Ausbildung placement, undergraduate study, and
-            master's admission in Germany.
+            master&apos;s admission in Germany.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            
-              href="#paths"
-              className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
-            >
-              Explore Pathways
-              <ArrowIcon />
-            </a>
-            <Link
-              href="/contact"
-              className="btn btn-lg border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
-            >
-              Book Consultation
-            </Link>
-          </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="#paths"
+                className="btn btn-secondary btn-lg gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
+              >
+                Explore Pathways
+                <ArrowIcon />
+              </a>
+              <Link
+                href="/contact"
+                className="btn btn-lg border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
+              >
+                Book Consultation
+              </Link>
+            </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-tribar" />
@@ -321,7 +321,7 @@ export default function CareerOpportunitiesPage() {
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-[48px] border-white/[0.04] pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full border-12 border-white/4 pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-6 text-center relative">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -350,7 +350,7 @@ export default function CareerOpportunitiesPage() {
               Schedule Your Consultation
               <ArrowIcon />
             </Link>
-            
+            <a
               href="#paths"
               className="btn btn-lg border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
             >
