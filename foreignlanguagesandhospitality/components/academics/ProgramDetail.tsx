@@ -21,11 +21,12 @@ const BackIcon = () => (
 
 export default function ProgramDetail({ program }: Props) {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-16">
+    <div className="max-w-6xl mx-auto px-6 py-16">
 
-      <Link href="/academics" className="inline-flex items-center gap-2 mb-8">
+      {/* Back */}
+      <Link href="/academics" className="inline-flex items-center gap-2 mb-8 text-sm font-medium">
         <BackIcon />
-        All Programs
+        Back to Programs
       </Link>
 
       <div className="grid lg:grid-cols-3 gap-10">
@@ -39,9 +40,13 @@ export default function ProgramDetail({ program }: Props) {
             </div>
           )}
 
-          <h1 className="text-3xl font-black">{program.title}</h1>
+          <h1 className="text-3xl font-black text-primary">
+            {program.title}
+          </h1>
 
-          <p>{program.description}</p>
+          <p className="text-neutral-600 leading-relaxed">
+            {program.description}
+          </p>
 
           <FacilitiesList facilities={program.facilities} />
         </div>
@@ -49,31 +54,29 @@ export default function ProgramDetail({ program }: Props) {
         {/* Sidebar */}
         <aside className="flex flex-col gap-5">
 
-          <div className="bg-white border rounded-3xl p-6">
-            <p className="text-sm font-bold mb-2">Duration</p>
-            <p>{program.duration}</p>
+          <div className="bg-white border rounded-3xl p-6 shadow-sm">
+            <p className="text-sm font-bold mb-1">Duration</p>
+            <p className="text-neutral-600">{program.duration}</p>
 
-            <div className="mt-4 flex flex-col gap-2">
+            <div className="mt-5 flex flex-col gap-3">
               <Link href="/admissions" className="btn btn-secondary">
-                Apply
-                <ArrowIcon />
+                Apply Now <ArrowIcon />
               </Link>
 
               <Link href="/contact" className="btn border">
-                Ask Question
-                <ArrowIcon />
+                Ask Question <ArrowIcon />
               </Link>
             </div>
           </div>
 
-          {/* ✅ FIXED WhatsApp */}
+          {/* WhatsApp */}
           <a
             href="https://wa.me/254723104680"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-4 bg-green-50 border rounded-2xl p-5"
           >
-            <div className="w-10 h-10 bg-green-500 text-white flex items-center justify-center rounded-xl shrink-0">
+            <div className="w-10 h-10 bg-green-500 text-white flex items-center justify-center rounded-xl">
               W
             </div>
             <div>
