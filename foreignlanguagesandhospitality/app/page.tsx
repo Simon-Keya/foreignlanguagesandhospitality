@@ -1,4 +1,4 @@
-// src/app/(site)/page.tsx
+//app/page.tsx
 
 import EmpoweringSection from '@/components/home/EmpoweringSection';
 import FAQ from '@/components/home/FAQ';
