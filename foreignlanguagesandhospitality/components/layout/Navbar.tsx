@@ -24,9 +24,8 @@ const programsDropdown = [
       </svg>
     ),
     links: [
-      { label: "All Language Courses", href: "/academics" },
-      { label: "German Language (A1–B2)", href: "/academics/german-language" },
-      { label: "English, French & More", href: "/academics" },
+      { label: "All Language Courses", href: "/academics/languages" },
+
     ],
   },
   {
@@ -37,7 +36,7 @@ const programsDropdown = [
       </svg>
     ),
     links: [
-      { label: "Hospitality Management", href: "/academics/hospitality-management" },
+      { label: "Hospitality Management", href: "/academics/hospitality management" },
       { label: "Nursing Career Preparation", href: "/academics/nursing-preparation" },
     ],
   },

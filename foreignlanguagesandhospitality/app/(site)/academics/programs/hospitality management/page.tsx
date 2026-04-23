@@ -1,8 +1,8 @@
 // src/app/(site)/programs/hospitality/page.tsx
 
+import SectionTitle from '@/components/common/SectionTitle';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import SectionTitle from '@/components/common/SectionTitle';
 
 export const metadata: Metadata = {
   title: 'Hospitality Management Programs | IIFLHM Narok',

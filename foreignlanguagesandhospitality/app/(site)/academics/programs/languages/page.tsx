@@ -1,8 +1,8 @@
 // src/app/(site)/programs/language courses/page.tsx
 
+import SectionTitle from '@/components/common/SectionTitle';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import SectionTitle from '@/components/common/SectionTitle';
 
 export const metadata: Metadata = {
   title: 'Language Courses | Learn German, English, French & More | IIFLHM',
