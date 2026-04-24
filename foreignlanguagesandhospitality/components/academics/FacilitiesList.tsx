@@ -1,46 +1,31 @@
-
 const CheckIcon = () => (
-  <svg
-    viewBox="0 0 16 16"
-    className="w-4 h-4 shrink-0"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M3 8l3.5 3.5L13 4" />
-  </svg>
+  <div className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0">
+    <svg viewBox="0 0 16 16" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={3}>
+      <path d="M3 8l3.5 3.5L13 4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </div>
 );
 
-type Props = {
-  facilities?: string[];
-};
-
-export default function FacilitiesList({ facilities }: Props) {
+export default function FacilitiesList({ facilities }: { facilities?: string[] }) {
   if (!facilities?.length) return null;
 
   return (
-    <div className="mt-10">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-6 h-px bg-secondary" />
-        <h3 className="text-xs font-black uppercase tracking-eyebrow text-secondary">
-          Facilities & Resources
+    <div className="mt-12">
+      <div className="flex items-center gap-4 mb-8">
+        <h3 className="text-sm font-black uppercase tracking-widest text-secondary">
+          What you&apos;ll get
         </h3>
+        <div className="flex-1 h-px bg-base-200" />
       </div>
 
-      {/* List */}
-      <div className="grid sm:grid-cols-2 gap-3">
+      <div className="grid sm:grid-cols-2 gap-4">
         {facilities.map((facility) => (
           <div
             key={facility}
-            className="flex items-start gap-3 bg-base-100 border border-base-300 rounded-xl px-4 py-3 hover:border-primary hover:shadow-sm transition"
+            className="flex items-center gap-4 bg-white border border-base-200 rounded-2xl p-4 hover:border-primary hover:shadow-md transition-all duration-300 group"
           >
-            <span className="text-primary mt-0.5">
-              <CheckIcon />
-            </span>
-            <span className="text-sm text-neutral-700 font-medium leading-snug">
+            <CheckIcon />
+            <span className="text-sm font-bold text-neutral-700 group-hover:text-primary transition-colors">
               {facility}
             </span>
           </div>

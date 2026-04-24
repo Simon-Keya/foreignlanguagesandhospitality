@@ -55,76 +55,53 @@ const ChevronIcon = ({ open }: { open: boolean }) => (
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index); // ✅ auto-close others
-  };
-
   return (
-    <section className="py-24 bg-base-200 relative overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-1 bg-tribar" />
+    <section className="py-24 bg-white relative">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <SectionTitle
+            title="Frequently Asked Questions"
+            subtitle="Answers to common questions about our programs, admissions, and student life"
+          />
+        </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative">
-        <SectionTitle
-          title="Frequently Asked Questions"
-          subtitle="Answers to common questions about our programs, admissions, and student life"
-        />
-
-        <div className="mt-14 flex flex-col gap-3">
+        <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
-
             return (
               <div
                 key={index}
-                className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? "border-primary shadow-md"
-                    : "border-base-300 shadow-sm hover:shadow-md hover:border-primary/30"
+                className={`transition-all duration-300 rounded-2xl ${
+                  isOpen ? "bg-[#F8FAFC] border-2 border-primary" : "bg-white border border-neutral-200"
                 }`}
               >
-                {/* HEADER */}
                 <button
-                  onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between gap-4 px-7 py-5 text-left"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="w-full flex items-center justify-between gap-6 px-8 py-6 text-left"
                 >
-                  <div className="flex items-center gap-4">
-                    <span
-                      className={`text-xs font-black tracking-eyebrow shrink-0 ${
-                        isOpen ? "text-secondary" : "text-neutral-300"
-                      }`}
-                    >
+                  <div className="flex items-center gap-6">
+                    <span className={`text-sm font-black transition-colors ${isOpen ? 'text-secondary' : 'text-neutral-400'}`}>
                       {String(index + 1).padStart(2, "0")}
                     </span>
-
-                    <span
-                      className={`font-bold text-base ${
-                        isOpen ? "text-primary" : "text-neutral-700"
-                      }`}
-                    >
+                    <span className={`font-black text-lg leading-tight ${isOpen ? 'text-primary' : 'text-neutral-700'}`}>
                       {faq.q}
                     </span>
                   </div>
-
                   <ChevronIcon open={isOpen} />
                 </button>
 
-                {/* ANSWER (Animated) */}
-                <AnimatePresence initial={false}>
+                <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="px-7 pb-6">
-                        <div className="pl-5 border-l-2 border-accent">
-                          <p className="text-sm text-neutral-600 leading-relaxed">
-                            {faq.a}
-                          </p>
-                        </div>
+                      <div className="px-8 pb-8 ml-[3.5rem]">
+                        <p className="text-neutral-600 leading-loose border-l-4 border-accent-light pl-6 py-2">
+                          {faq.a}
+                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -134,30 +111,19 @@ export default function FAQ() {
           })}
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 bg-white rounded-3xl border border-base-300 shadow-sm p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="font-bold text-primary text-lg">
-              Can&apos;t find what you&apos;re looking for?
-            </p>
-            <p className="text-sm text-neutral-500 mt-1">
-              Our admissions team is available Monday–Friday, 8 AM–6 PM EAT.
-            </p>
+        {/* Admissions Help Desk Card */}
+        <div className="mt-20 bg-primary rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-10 text-white shadow-2xl">
+          <div className="flex-1">
+            <h4 className="text-2xl font-black mb-2">Can&apos;t find what you&apos;re looking for?</h4>
+            <p className="text-white/60">Our admissions team is available Monday–Friday, 8 AM–6 PM EAT for one-on-one guidance.</p>
           </div>
-
-          <div className="flex gap-3 shrink-0">
-            <Link href="/contact" className="btn btn-secondary gap-2">
-              Contact Us
-            </Link>
-
-            <a
-              href="https://wa.me/254723104680"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-ghost border border-base-300 gap-2"
-            >
-              WhatsApp
-            </a>
+          <div className="flex gap-4">
+             <Link href="/contact" className="px-6 py-3 bg-secondary font-black rounded-xl hover:scale-105 transition-transform">
+               Contact Us
+             </Link>
+             <a href="https://wa.me/254723104680" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-white/20 font-black rounded-xl hover:bg-white/10">
+               WhatsApp
+             </a>
           </div>
         </div>
       </div>

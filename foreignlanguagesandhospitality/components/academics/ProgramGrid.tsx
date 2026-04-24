@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import ProgramCard, { Program } from "./ProgramCard";
 
@@ -6,52 +8,29 @@ type Props = {
 };
 
 export default function ProgramGrid({ programs }: Props) {
-  // ─────────────────────────────────────────────
-  // Empty State
-  // ─────────────────────────────────────────────
-  if (!programs || programs.length === 0) {
+  if (!programs?.length) {
     return (
-      <div className="text-center py-20 px-6">
-        <h3 className="font-bold text-lg text-primary mb-2">
-          No Programs Found
-        </h3>
-
-        <p className="text-sm text-neutral-500 max-w-sm mx-auto leading-relaxed">
-          There are currently no programs available. Please check back later
-          or contact us for more information.
-        </p>
-
-        <Link
-          href="/contact"
-          className="btn btn-secondary mt-6 inline-flex items-center gap-2 shadow-glow hover:scale-105 transition-transform duration-300"
-        >
-          Contact Us
-          <svg
-            viewBox="0 0 16 16"
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M3 8h10M9 4l4 4-4 4" />
+      <div className="flex flex-col items-center text-center py-24 px-6 bg-base-100 rounded-[3rem] border-2 border-dashed border-base-300">
+        <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 text-neutral-300" fill="none" stroke="currentColor" strokeWidth={1.5}>
+            <path d="M12 4v16m8-8H4" strokeLinecap="round" />
           </svg>
+        </div>
+        <h3 className="font-black text-2xl text-primary mb-3">No Programs Found</h3>
+        <p className="text-neutral-500 max-w-sm leading-relaxed mb-8">
+          We couldn&apos;t find any courses matching your criteria. Check back soon for new intakes!
+        </p>
+        <Link href="/contact" className="btn btn-secondary px-8">
+          Talk to Admissions
         </Link>
       </div>
     );
   }
 
-  // ─────────────────────────────────────────────
-  // Programs Grid
-  // ─────────────────────────────────────────────
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {programs.map((program) => (
-        <ProgramCard
-          key={program.slug}
-          program={program}
-        />
+        <ProgramCard key={program.slug} program={program} />
       ))}
     </div>
   );
