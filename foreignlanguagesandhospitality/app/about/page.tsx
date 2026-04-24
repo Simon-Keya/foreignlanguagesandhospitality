@@ -1,5 +1,3 @@
-// src/app/(site)/about/page.tsx
-
 import CoreValues from '@/components/about/CoreValues';
 import Facilities from '@/components/about/Facilities';
 import FacultyGrid from '@/components/about/FacultyGrid';
@@ -8,79 +6,86 @@ import MissionVision from '@/components/about/MissionVision';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us | International Institute of Foreign Languages and Hospitality Management',
-  description: 'Learn about our mission, vision, founder Soila Lasoi, core values, world-class facilities, and expert faculty.',
-  keywords: ['about us', 'Soila Lasoi', 'hospitality education Kenya', 'German language training', 'Narok institute'],
+  title: 'About Our Institute | Global Hospitality & Language Excellence',
+  description: 'Discover the International Institute of Foreign Languages and Hospitality Management. Leading hospitality education in Kenya under the visionary leadership of Soila Lasoi.',
 };
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="bg-primary text-white py-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Shaping the Future of Hospitality Education
+      {/* Hero Section: Institutional Excellence */}
+      <section className="relative bg-[#0A192F] py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+             style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+          <span className="text-yellow-400 font-black uppercase tracking-[0.3em] text-xs mb-6 block">
+            ESTABLISHED FOR GLOBAL EXCELLENCE
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">
+            Bridging Potential with <br/> <span className="text-yellow-400 underline decoration-white/10">Global Opportunity.</span>
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
-            With world-class faculty, innovative programs, and industry partnerships, 
-            we are committed to developing the next generation of hospitality leaders.
+          <p className="text-white/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-12">
+            We are more than an institute; we are a gateway. From the heart of Narok to the hospitality hubs of Europe, we prepare leaders for a world without borders.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
-            <a href="#founder" 
-               className="btn btn-secondary text-white px-8 py-3 text-lg font-medium">
-              Watch Our Story
+          <div className="flex flex-col sm:flex-row justify-center gap-5">
+            <a href="#founder" className="bg-white text-[#0A192F] px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-yellow-400 transition-all shadow-xl">
+              The Founder's Vision
             </a>
-            <a href="/admissions" 
-               className="btn btn-outline border-white text-white hover:bg-white hover:text-primary px-8 py-3 text-lg font-medium">
-              Apply Now
+            <a href="/admissions" className="bg-transparent border border-white/20 text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+              Join the Next Intake
             </a>
           </div>
         </div>
+      </section>
+
+      {/* Strategic Foundation */}
+      <div className="relative z-20 -mt-10">
+        <MissionVision />
       </div>
 
-      {/* Mission & Vision */}
-      <MissionVision />
-
-      {/* Core Values */}
       <CoreValues />
 
-      {/* World-Class Facilities */}
-      <Facilities />
+      {/* Campus Experience */}
+      <div className="py-24 bg-neutral-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-4xl font-black text-[#0A192F] tracking-tight">World-Class Facilities</h2>
+              <p className="text-neutral-500 mt-4 text-lg">Our campus is designed to mirror the luxury hospitality environments our students will eventually lead.</p>
+            </div>
+            <div className="h-px flex-1 bg-neutral-200 hidden md:block mx-10 mb-4" />
+          </div>
+          <Facilities />
+        </div>
+      </div>
 
-      {/* Meet the Founder */}
       <FounderBio />
 
-      {/* Our Expert Faculty */}
-      <div id="faculty" className="py-20 bg-base-200">
+      {/* Faculty Section */}
+      <section id="faculty" className="py-24 bg-[#0A192F] text-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-primary mb-4">Our Expert Faculty</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Dedicated professionals committed to your success
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">Our Distinguished Faculty</h2>
+            <p className="text-white/50 text-lg max-w-2xl mx-auto font-medium">
+              A blend of international industry veterans and specialized academic experts dedicated to your professional mastery.
             </p>
           </div>
-
           <FacultyGrid />
         </div>
-      </div>
+      </section>
 
-      {/* Final CTA */}
-      <div className="bg-primary py-16 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-            Ready to Build Your Global Future?
-          </h2>
-          <p className="text-lg mb-8 opacity-90">
-            Join our community and take the first step toward a successful international career.
-          </p>
-          <a href="/admissions" 
-             className="btn btn-secondary btn-lg text-lg px-10">
-            Apply Now – June Intake Open
+      {/* Final Institutional CTA */}
+      <section className="bg-yellow-400 py-20">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-black text-[#0A192F] mb-6 tracking-tight">Your International Career Starts Here.</h2>
+          <p className="text-[#0A192F]/70 text-lg mb-10 font-bold uppercase tracking-widest">Enrollment for the Upcoming Semester is Now Open</p>
+          <a href="/admissions" className="bg-[#0A192F] text-white px-12 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-sm hover:scale-105 transition-transform shadow-2xl">
+            Secure Your Spot Today
           </a>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

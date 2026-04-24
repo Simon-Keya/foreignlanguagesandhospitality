@@ -1,18 +1,18 @@
 "use client";
 
-type Props = {
+interface CategoryFilterProps {
   categories: string[];
   active: string;
   onChange: (category: string) => void;
-};
+}
 
 export default function CategoryFilter({
   categories,
   active,
   onChange,
-}: Props) {
+}: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-3">
+    <div className="flex flex-wrap justify-center gap-4 py-8">
       {categories.map((cat) => {
         const isActive = cat === active;
 
@@ -20,11 +20,12 @@ export default function CategoryFilter({
           <button
             key={cat}
             onClick={() => onChange(cat)}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300
+            className={`
+              px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-500
               ${
                 isActive
-                  ? "bg-primary text-white shadow-glow"
-                  : "bg-base-200 text-neutral-600 hover:bg-primary/10 hover:text-primary"
+                  ? "bg-primary text-white shadow-xl shadow-primary/20 scale-105"
+                  : "bg-white border border-neutral-200 text-neutral-500 hover:border-accent hover:text-accent"
               }
             `}
           >
