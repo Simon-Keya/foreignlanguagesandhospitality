@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Optional: environment variable (recommended)
-const FORMSPREE_ENDPOINT = process.env.FORMSPREE_ENDPOINT || "";
+const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ID || "";
 
 // ─────────────────────────────────────────────
 // Types
