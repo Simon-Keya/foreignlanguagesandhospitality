@@ -1,7 +1,8 @@
-/* src/app/globals.css */
+/* app/globals.css */
 
-@import "tailwindcss";
-@plugin "daisyui";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Base Styles */
 @layer base {
@@ -10,7 +11,9 @@
   }
 
   body {
-    font-family: 'Inter', system_ui, sans-serif;
+    /* Fixed font-family: system-ui (dash, not underscore) */
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-white text-neutral-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -28,14 +31,13 @@
     background-position: center;
   }
 
+  /* card-hover using @apply for cleaner v3 processing */
   .card-hover {
-    transition: all 0.3s ease;
+    @apply transition-all duration-300;
   }
   
   .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 
-                0 8px 10px -6px rgb(0 0 0 / 0.1);
+    @apply -translate-y-2 shadow-xl;
   }
 
   .btn-brand {
