@@ -11,7 +11,6 @@
   }
 
   body {
-    /* Fixed font-family: system-ui (dash, not underscore) */
     font-family: 'Inter', system-ui, sans-serif;
     @apply bg-white text-neutral-900;
   }
@@ -31,7 +30,6 @@
     background-position: center;
   }
 
-  /* card-hover using @apply for cleaner v3 processing */
   .card-hover {
     @apply transition-all duration-300;
   }
