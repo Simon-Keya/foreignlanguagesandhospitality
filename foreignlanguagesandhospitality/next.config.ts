@@ -5,16 +5,15 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "**", // Allows images from any secure source
       },
     ],
   },
-  // Add this part below:
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Keeps your deployment from failing on small linting errors
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Keeps your deployment from failing on type mismatches
   }
 };
 
