@@ -1,8 +1,8 @@
-// src/app/(site)/career-opportunities/undergraduate/page.tsx
+// src/app/career-opportunities/undergraduate/page.tsx
 
+import SectionTitle from '@/components/common/SectionTitle';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import SectionTitle from '@/components/common/SectionTitle';
 
 export const metadata: Metadata = {
   title: 'Undergraduate Studies in Germany | IIFLHM',

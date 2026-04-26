@@ -1,8 +1,8 @@
-// src/app/(site)/career-opportunities/masters/page.tsx
+// src/app/career-opportunities/masters/page.tsx
 
+import SectionTitle from '@/components/common/SectionTitle';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import SectionTitle from '@/components/common/SectionTitle';
 
 export const metadata: Metadata = {
   title: 'Master’s Degree Programs in Germany | IIFLHM',
