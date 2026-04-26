@@ -2,18 +2,11 @@ import typography from "@tailwindcss/typography";
 import daisyui from "daisyui";
 import type { Config } from "tailwindcss";
 
-// ✅ Extend Tailwind type to include daisyui
-type DaisyUIConfig = Config & {
-  daisyui?: {
-    themes?: Record<string, unknown>[];
-  };
-};
-
-const config: DaisyUIConfig = {
+const config: Config = {
+  // We only target /src/app and /src/components
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
   theme: {
@@ -35,7 +28,6 @@ const config: DaisyUIConfig = {
           light: "#F7D45A",
         },
       },
-
       backgroundImage: {
         tribar:
           "linear-gradient(90deg, #0A2540 0%, #0A2540 40%, #E30613 40%, #E30613 70%, #F2C12C 70%, #F2C12C 100%)",
@@ -45,16 +37,16 @@ const config: DaisyUIConfig = {
     },
   },
 
-  plugins: [daisyui, typography],
+  plugins: [typography, daisyui],
 
   daisyui: {
     themes: [
       {
         institute: {
-          primary: "#0A2540",
-          secondary: "#E30613",
-          accent: "#F2C12C",
-          neutral: "#1F2937",
+          "primary": "#0A2540",
+          "secondary": "#E30613",
+          "accent": "#F2C12C",
+          "neutral": "#1F2937",
           "base-100": "#FFFFFF",
         },
       },
