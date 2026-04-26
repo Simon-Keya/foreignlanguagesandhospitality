@@ -1,10 +1,7 @@
-/* app/globals.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base Styles */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -21,7 +18,6 @@
   }
 }
 
-/* Custom Utility Classes */
 @layer components {
   .hero-bg {
     background-image: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.85)), 
@@ -43,7 +39,6 @@
   }
 }
 
-/* Smooth animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
