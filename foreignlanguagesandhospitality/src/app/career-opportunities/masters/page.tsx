@@ -1,6 +1,6 @@
 // src/app/career-opportunities/masters/page.tsx
-
 import SectionTitle from '@/components/common/SectionTitle';
+import { ArrowLeft, FileText, Landmark, Languages } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -12,76 +12,82 @@ export const metadata: Metadata = {
 export default function MastersPage() {
   return (
     <div className="min-h-screen bg-white">
-      <div className="bg-primary text-white py-24">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Postgraduate Studies</h1>
-          <p className="text-3xl">Master’s Degree Programs in Germany</p>
+      <div className="bg-[#0A192F] text-white py-24 border-b-4 border-yellow-400">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-5xl md:text-7xl font-black mb-4">Postgraduate</h1>
+          <p className="text-2xl text-yellow-400 font-light tracking-wide italic">Master&apos;s Degrees in Germany</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <Link href="/career-opportunities" className="inline-flex items-center gap-2 text-secondary hover:text-red-600 mb-10">
-          ← Back to Career Opportunities
+        <Link href="/career-opportunities" className="inline-flex items-center gap-2 text-red-600 font-bold mb-10">
+          <ArrowLeft size={18} /> Back to Careers
         </Link>
 
-        <SectionTitle 
-          title="Advance Your Career with a Master’s Degree in Germany" 
-        />
+        <SectionTitle title="Advance Your Professional Expertise" />
 
-        <div className="prose prose-lg max-w-none mb-16">
-          <p>
-            Whether you want English-taught or German-taught programs, we provide complete guidance for Kenyan students pursuing master’s degrees in Germany.
-          </p>
-        </div>
+        <div className="grid lg:grid-cols-3 gap-8 mb-20">
+          {/* Docs Card */}
+          <div className="lg:col-span-2 bg-neutral-50 p-10 rounded-[2rem] border border-neutral-100">
+            <h3 className="text-2xl font-black text-[#0A192F] mb-8 flex items-center gap-3">
+              <FileText className="text-red-600" /> Essential Documents
+            </h3>
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
+              {[
+                "Valid Passport",
+                "Degree Certificate & Transcripts",
+                "CV (Europass Format)",
+                "Letter of Motivation",
+                "2 Recommendation Letters",
+                "APS Certificate (Mandatory)",
+                "Language Proficiency Proof"
+              ].map((doc) => (
+                <div key={doc} className="flex items-center gap-3 border-b border-neutral-200 py-3">
+                  <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full" />
+                  <span className="font-medium text-neutral-700">{doc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Requirements */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-primary mb-10">Master’s Degree Requirements</h2>
-          
-          <div className="grid md:grid-cols-2 gap-10">
+          {/* Languages Card */}
+          <div className="bg-[#0A192F] p-10 rounded-[2rem] text-white">
+            <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-yellow-400">
+              <Languages /> Proficiency
+            </h3>
             <div className="space-y-8">
               <div>
-                <h3 className="font-semibold text-xl mb-4">1. Bachelor’s Degree</h3>
-                <p className="text-neutral-700">Recognized undergraduate degree (preferably Second Class Upper or equivalent) in a related field.</p>
+                <p className="text-xs uppercase tracking-widest text-white/50 mb-2">English Programs</p>
+                <p className="text-lg font-bold">IELTS 6.5+ / TOEFL 80+</p>
               </div>
+              <div className="h-px bg-white/10" />
               <div>
-                <h3 className="font-semibold text-xl mb-4">2. Language Proficiency</h3>
-                <p><strong>English-taught:</strong> IELTS 6.0–6.5 or TOEFL iBT 80+</p>
-                <p><strong>German-taught:</strong> TestDaF / DSH / Goethe B2–C1</p>
+                <p className="text-xs uppercase tracking-widest text-white/50 mb-2">German Programs</p>
+                <p className="text-lg font-bold">TestDaF 4 / Goethe C1</p>
               </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-xl mb-6">Required Documents</h3>
-              <ul className="list-disc pl-6 space-y-2 text-neutral-700">
-                <li>Passport</li>
-                <li>Bachelor’s degree certificate & transcripts</li>
-                <li>CV and Letter of Motivation</li>
-                <li>Two recommendation letters</li>
-                <li>APS Certificate (mandatory for Kenyans)</li>
-                <li>Language test results</li>
-              </ul>
             </div>
           </div>
         </div>
 
-        {/* Financial Requirements */}
-        <div className="bg-base-200 p-12 rounded-3xl mb-16">
-          <h2 className="text-3xl font-bold text-primary mb-8">Financial Requirements</h2>
-          <p className="text-lg mb-6">
-            To get a student visa, you must show proof of financial resources:
-          </p>
-          <div className="bg-white p-8 rounded-2xl">
-            <p className="font-semibold">Blocked Account (Sperrkonto):</p>
-            <p className="text-2xl font-bold text-primary mt-2">€11,904 per year (2025 requirement)</p>
-            <p className="text-sm text-neutral-500 mt-4">≈ KES 1,650,000 per year</p>
+        {/* Finance Section */}
+        <div className="relative overflow-hidden bg-neutral-900 rounded-[3rem] p-10 lg:p-16 text-white mb-20">
+          <div className="absolute top-0 right-0 p-10 opacity-10">
+            <Landmark size={200} />
+          </div>
+          <div className="relative z-10 max-w-2xl">
+            <h2 className="text-3xl font-black mb-6">Visa Financial Requirements</h2>
+            <p className="text-white/70 text-lg mb-8">To secure a German Student Visa, the government requires proof of financial stability via a Blocked Account.</p>
+            <div className="inline-block bg-yellow-400 text-[#0A192F] px-8 py-6 rounded-2xl">
+              <p className="text-sm uppercase font-black tracking-tighter mb-1">Blocked Account Amount (2025)</p>
+              <p className="text-4xl font-black">€11,904 <span className="text-xl opacity-60">/ Year</span></p>
+              <p className="text-sm mt-2 font-bold italic">Approx. KES 1,650,000</p>
+            </div>
           </div>
         </div>
 
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Begin Your Master’s Journey?</h2>
-          <Link href="/contact" className="btn btn-secondary btn-lg px-12">
-            Book Your Career Consultation
+          <Link href="/contact" className="inline-block bg-red-600 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-[#0A192F] transition-all shadow-xl shadow-red-600/20">
+            Book a Master&apos;s Consultation
           </Link>
         </div>
       </div>

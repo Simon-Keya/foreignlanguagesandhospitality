@@ -73,7 +73,7 @@ export default function ContactPage() {
             </div>
 
             {/* Direct WhatsApp Call-to-Action */}
-            <a href="https://wa.me/254723104680" target="_blank" className="flex items-center justify-between p-8 rounded-[2rem] bg-green-600 text-white hover:bg-green-700 transition-all shadow-xl shadow-green-600/20 group">
+            <a href="https://wa.me/+254 705 704 554" target="_blank" className="flex items-center justify-between p-8 rounded-[2rem] bg-green-600 text-white hover:bg-green-700 transition-all shadow-xl shadow-green-600/20 group">
               <span className="text-xl font-black tracking-tight">Chat with an Advisor</span>
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">→</div>
             </a>
