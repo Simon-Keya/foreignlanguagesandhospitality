@@ -1,29 +1,16 @@
 [build]
-  # The command to build your Next.js project
-  command = "npm run build"
+  # 1. Point to the folder where the code actually lives
+  base = "foreignlanguagesandhospitality"
   
-  # The directory Next.js uses for the production build
+  # 2. This path is RELATIVE to the base folder above
+  # So Netlify looks in 'foreignlanguagesandhospitality/.next'
   publish = ".next"
+  
+  # 3. The command to run inside the 'base' folder
+  command = "npm run build"
 
 [build.environment]
-  # Next.js 15 requires Node 18.18+, so we set it to 20 for stability
   NODE_VERSION = "20"
-  # Ensures the Next.js runtime is used
-  NETLIFY_NEXT_PLUGIN_SKIP_CACHE = "false"
 
 [[plugins]]
-  # This plugin optimizes Next.js for Netlify automatically
   package = "@netlify/plugin-nextjs"
-
-[dev]
-  # This allows you to test Netlify's behavior locally
-  command = "npm run dev"
-  port = 3000
-
-[[redirects]]
-  # This ensures that your SPA routes and API routes handle 
-  # refreshes correctly without throwing 404s
-  from = "/*"
-  to = "/.next/server/pages/:splat"
-  status = 200
-  force = false
