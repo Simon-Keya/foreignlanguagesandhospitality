@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link"; // Imported Link to fix the <a> error
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
@@ -16,7 +17,7 @@ const admissionSchema = z.object({
   experience: z.string().optional(),
   motivation: z.string().min(30, "Please tell us why you want to join (min 30 characters)"),
   preferredIntake: z.string().min(1, "Please select your preferred intake"),
-  howDidYouHear: z.string().optional(),
+  howDidYouHear: z.string().min(1, "Please let us know how you heard about us"),
   document: z.instanceof(File).optional(),
 });
 
@@ -36,7 +37,7 @@ const programs = [
 
 const intakes = ["June 2025 Intake", "September 2025 Intake", "January 2026 Intake"];
 const educationLevels = ["KCPE", "KCSE / O-Level", "Certificate", "Diploma", "Degree", "Postgraduate"];
-const hearAboutUs = ["Friend / Family", "Social Media", "Google Search", "WhatsApp", "Community Event", "Other"];
+const hearAboutUsOptions = ["Friend / Family", "Social Media", "Google Search", "WhatsApp", "Community Event", "Other"];
 
 // --- Reusable sub-components ---
 const FieldLabel = ({ children, required }: { children: React.ReactNode; required?: boolean }) => (
@@ -140,10 +141,10 @@ export default function AdmissionForm() {
         <svg viewBox="0 0 24 24" className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth={2}><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
       </div>
       <h3 className="text-2xl font-black text-primary mb-3">Application Received!</h3>
-      <p className="text-neutral-600 text-sm max-w-sm mx-auto">We'll contact you within <strong className="text-primary">48 hours</strong>.</p>
+      <p className="text-neutral-600 text-sm max-w-sm mx-auto">We&apos;ll contact you within <strong className="text-primary">48 hours</strong>.</p>
       <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
         <a href="https://wa.me/254723104680" target="_blank" className="btn btn-secondary">Chat on WhatsApp</a>
-        <a href="/" className="btn border border-base-300 bg-white text-primary">Return Home</a>
+        <Link href="/" className="btn border border-base-300 bg-white text-primary">Return Home</Link>
       </div>
     </div>
   );
@@ -208,6 +209,17 @@ export default function AdmissionForm() {
                   <FieldError message={errors.educationLevel?.message} />
                 </div>
               </div>
+              
+              {/* Added the missing field to use hearAboutUsOptions */}
+              <div>
+                <FieldLabel required>How did you hear about us?</FieldLabel>
+                <select {...register("howDidYouHear")} className={`${inputBase} ${errors.howDidYouHear ? inputError : ""}`}>
+                  <option value="">Select one...</option>
+                  {hearAboutUsOptions.map((o) => <option key={o} value={o}>{o}</option>)}
+                </select>
+                <FieldError message={errors.howDidYouHear?.message} />
+              </div>
+
               <div>
                 <FieldLabel>Supporting Document (optional)</FieldLabel>
                 <label className={`flex flex-col items-center justify-center w-full h-28 rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200 ${uploadedFileName ? "border-primary bg-primary/5" : "border-base-300 bg-base-100 hover:border-primary"}`}>

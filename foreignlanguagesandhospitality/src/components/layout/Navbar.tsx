@@ -1,40 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Academics", href: "/academics" },
   { label: "Admissions", href: "/admissions" },
+  { label: "Careers", href: "/career-opportunities" }, // Added Careers here
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
 
-const programsDropdown = [
-  {
-    group: "Language Training",
-    links: [
-      { label: "All Language Courses", href: "/academics" },
-      { label: "German Language (A1–B2)", href: "/academics/german-language" },
-      { label: "French & Spanish", href: "/academics" },
-    ],
-  },
-  {
-    group: "Vocational Excellence",
-    links: [
-      { label: "Hospitality Management", href: "/academics/hospitality-management" },
-      { label: "Nursing Preparation", href: "/academics/nursing-preparation" },
-    ],
-  },
-];
-
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [programsOpen, setProgramsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const PHONE = "254723104680";
+const PHONE = "+254 705 704554";
 const MESSAGE = encodeURIComponent(
   "Hello! I'm interested in learning more about your programs at the International Institute of Foreign Languages and Hospitality Management."
 );
