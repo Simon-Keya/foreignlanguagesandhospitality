@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Hero() {
   const handleDownload = () => {
-    window.open('/brochure.pdf', '_blank');
+    window.open('/docs/brochure.pdf', '_blank');
   };
 
   return (

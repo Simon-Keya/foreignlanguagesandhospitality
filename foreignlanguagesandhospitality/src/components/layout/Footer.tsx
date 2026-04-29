@@ -23,16 +23,19 @@ const socials = [
   { 
     label: "Facebook", 
     href: "https://www.facebook.com/61574315371972",
+    brandColor: "group-hover:text-[#1877F2]",
     icon: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
   },
   { 
     label: "WhatsApp", 
     href: "https://wa.me/254723104680",
+    brandColor: "group-hover:text-[#25D366]",
     icon: <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
   },
   { 
     label: "Instagram", 
     href: "#",
+    brandColor: "group-hover:text-[#E4405F]",
     icon: (
       <>
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -44,6 +47,7 @@ const socials = [
   { 
     label: "LinkedIn", 
     href: "#",
+    brandColor: "group-hover:text-[#0A66C2]",
     icon: (
       <>
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -56,47 +60,49 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A2540] text-white pt-24 pb-12 relative overflow-hidden border-t border-white/10">
+    <footer className="bg-[#0A2540] text-white pt-24 pb-12 relative overflow-hidden border-t border-white/10 font-sans">
+      {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] animate-pulse" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
           
+          {/* Brand - Full Institution Name */}
           <div className="lg:col-span-5 space-y-8">
             <Link href="/" className="flex items-center gap-5 group w-fit">
-              <div className="relative w-16 h-16 bg-white shadow-2xl transition-transform group-hover:scale-105">
+              <div className="relative w-16 h-16 bg-white shadow-2xl transition-transform group-hover:scale-105 shrink-0">
                 <Image src="/logo.png" alt="IFL Logo" fill className="object-cover" />
               </div>
               <div className="flex flex-col">
-                <span className="font-black text-xl md:text-2xl uppercase tracking-tight leading-none text-white">
-                  International Institute
-                </span>
-                <span className="text-accent text-[10px] font-black uppercase tracking-[0.25em] mt-2">
-                  Foreign Languages & Hospitality
+                <h2 className="font-black text-lg md:text-xl uppercase tracking-tighter leading-tight text-white max-w-sm">
+                  International Institute of Foreign Languages & Hospitality Management
+                </h2>
+                <span className="text-accent text-[10px] font-black uppercase tracking-[0.3em] mt-3 block">
+                  Empowering Global Careers
                 </span>
               </div>
             </Link>
 
             <p className="text-white/80 text-lg leading-relaxed max-w-md font-medium">
-              Transforming futures in Narok through world-class language training
-              and hospitality education focused on German standards.
+              Bridging the gap between Kenyan talent and world-class opportunities in 
+              Germany, Austria, and Switzerland.
             </p>
 
-            {/* REAL ICONS SOCIALS */}
+            {/* Social Media - Real Brand Colors on White Hover */}
             <div className="flex gap-4">
-              {socials.map(({ label, href, icon }) => (
+              {socials.map(({ label, href, icon, brandColor }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-12 h-12 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-secondary hover:border-secondary hover:-translate-y-1 transition-all duration-300 group"
+                  className="group w-12 h-12 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white hover:border-white hover:-translate-y-1 shadow-lg"
                 >
                   <svg 
                     viewBox="0 0 24 24" 
-                    className="w-5 h-5 fill-none stroke-current group-hover:text-white" 
+                    className={`w-6 h-6 fill-none stroke-current text-white transition-colors duration-300 ${brandColor}`} 
                     strokeWidth="2" 
                     strokeLinecap="round" 
                     strokeLinejoin="round"
@@ -108,10 +114,11 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Links Grid */}
           <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
             <div>
               <h4 className="text-secondary text-[12px] font-black uppercase tracking-widest mb-8 border-b border-white/10 pb-2 inline-block">
-                Navigation
+                Institute
               </h4>
               <ul className="space-y-4">
                 {footerNav.navigation.map(({ name, href }) => (
@@ -126,7 +133,7 @@ export default function Footer() {
 
             <div>
               <h4 className="text-secondary text-[12px] font-black uppercase tracking-widest mb-8 border-b border-white/10 pb-2 inline-block">
-                Specializations
+                Programs
               </h4>
               <ul className="space-y-4">
                 {footerNav.specializations.map(({ name, href }) => (
@@ -141,7 +148,7 @@ export default function Footer() {
 
             <div className="col-span-full md:col-span-1">
               <h4 className="text-secondary text-[12px] font-black uppercase tracking-widest mb-8 border-b border-white/10 pb-2 inline-block">
-                Contact
+                Reach Us
               </h4>
               <address className="not-italic text-sm space-y-4">
                 <p className="text-white font-bold leading-relaxed">
@@ -169,6 +176,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="pt-10 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
           <p className="text-[11px] font-bold text-white/50 uppercase tracking-[0.2em] max-w-md">
             © {new Date().getFullYear()} International Institute of Foreign Languages & Hospitality Management.
