@@ -7,7 +7,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Academics", href: "/academics" },
-  { label: "Admissions", href: "/admissions" },
+  { label: "Student Voices", href: "/student-voices" }, // Added
   { label: "Careers", href: "/career-opportunities" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
@@ -18,87 +18,97 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // NEW COLOR: Lighter Navy (#112D4E)
-  const lighterNavy = "bg-[#112D4E]"; 
-
   return (
-    <>
-      <div className="h-1 bg-gradient-to-r from-red-600 via-yellow-400 to-[#112D4E] sticky top-0 z-[70] w-full" />
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-primary/95 backdrop-blur-xl py-3 shadow-2xl border-b border-white/5" 
+          : "bg-primary py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        
+        {/* Logo Identity */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg transform group-hover:-rotate-3 transition-transform">
+            <span className="text-primary font-black text-base tracking-tighter uppercase">IFL</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="font-black text-base text-white leading-none tracking-tight">International Institute</span>
+            <span className="text-accent text-[9px] font-black uppercase tracking-[0.2em] mt-1">Languages & Hospitality</span>
+          </div>
+        </Link>
 
-      <nav
-        className={`sticky top-1 z-50 transition-all duration-300 ${
-          scrolled 
-            ? `${lighterNavy}/95 backdrop-blur-md py-2 shadow-lg border-b border-white/5` 
-            : `${lighterNavy} py-4`
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="px-4 py-2 text-[12px] font-bold uppercase tracking-wider text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+            >
+              {link.label}
+            </Link>
+          ))}
+          
+          <div className="h-4 w-px bg-white/10 mx-4" />
+
+          {/* Core CTA remains prominent */}
+          <Link
+            href="/admissions"
+            className="bg-accent text-primary px-6 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95"
+          >
+            Apply Now
+          </Link>
+        </div>
+
+        {/* Mobile Menu Trigger */}
+        <button 
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="lg:hidden p-2 text-white"
+          aria-label="Toggle menu"
+        >
+          <div className="w-6 h-5 flex flex-col justify-between">
+            <span className={`h-0.5 w-full bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`h-0.5 w-full bg-accent transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
+            <span className={`h-0.5 w-full bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Dropdown */}
+      <div 
+        className={`lg:hidden absolute top-full left-0 w-full bg-primary-dark/98 backdrop-blur-2xl transition-all duration-500 ease-in-out overflow-hidden ${
+          mobileOpen ? 'max-h-[100vh] border-t border-white/5 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-md">
-              <span className="text-[#112D4E] font-black text-base tracking-tighter">IFL</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-[15px] text-white leading-tight">International Institute</span>
-              <span className="text-yellow-400 text-[9px] font-bold uppercase tracking-widest">Languages & Hospitality</span>
-            </div>
-          </Link>
-
-          {/* Optimized Link Sizes */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="px-3 py-1.5 text-[13px] font-semibold text-white/80 hover:text-white transition-all"
-              >
-                {link.label}
-              </Link>
-            ))}
-            
-            <div className="h-4 w-px bg-white/10 mx-3" />
-
-            <Link
-              href="/admissions"
-              className="bg-yellow-400 text-[#112D4E] px-5 py-2 rounded-lg text-[11px] font-black uppercase tracking-wider hover:bg-white transition-all shadow-sm"
+        <div className="px-8 py-12 flex flex-col gap-6">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.label} 
+              href={link.href} 
+              onClick={() => setMobileOpen(false)}
+              className="text-xl font-black text-white/90 hover:text-accent transition-colors flex items-center justify-between group"
             >
-              Apply Now
+              {link.label}
+              <div className="w-2 h-2 rounded-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
-          </div>
-
-          <button 
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-white"
+          ))}
+          
+          <Link 
+            href="/admissions" 
+            onClick={() => setMobileOpen(false)}
+            className="mt-6 bg-accent text-primary py-5 rounded-2xl text-center font-black uppercase tracking-widest text-sm shadow-2xl active:scale-95"
           >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
-              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-            </div>
-          </button>
+            Apply Now
+          </Link>
         </div>
-
-        {/* Mobile View */}
-        <div className={`lg:hidden absolute top-full left-0 w-full ${lighterNavy} border-t border-white/5 transition-all duration-300 overflow-hidden ${mobileOpen ? 'max-h-screen border-b' : 'max-h-0'}`}>
-          <div className="px-6 py-8 flex flex-col gap-5">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.label} 
-                href={link.href} 
-                onClick={() => setMobileOpen(false)}
-                className="text-lg font-bold text-white/90"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }
