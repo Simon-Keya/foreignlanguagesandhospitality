@@ -51,63 +51,79 @@ const QuoteIcon = () => (
   </svg>
 );
 
-const FlagIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-    <line x1="4" y1="22" x2="4" y2="15" />
-  </svg>
-);
-
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-[#051B2E] text-white relative overflow-hidden">
-      {/* Decorative Radial Grid */}
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Institutional Top Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-tribar" />
+
+      {/* Blueprint Grid Background */}
       <div
-        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
-          backgroundImage: "radial-gradient(circle, #F2C12C 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundImage: "linear-gradient(#0A2540 1px, transparent 1px), linear-gradient(90deg, #0A2540 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16 border-b border-white/10 pb-12">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
           <div className="max-w-xl">
-            <h2 className="text-4xl md:text-5xl font-black mb-4">Global Success <br />Stories</h2>
-            <p className="text-white/60 font-medium">Tracing the impact of our training across the European healthcare and hospitality sectors.</p>
+             <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-1 bg-accent" />
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary/70">Success Stories</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-primary leading-tight">
+              Global Success <br /> Starts Here
+            </h2>
           </div>
-          <Link href="/admissions" className="px-8 py-4 bg-accent hover:bg-accent-dark text-primary font-black rounded-xl transition-all hover:scale-105">
-            Begin Your Success Story
+          <Link 
+            href="/admissions" 
+            className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-accent hover:text-primary transition-all shadow-xl hover:shadow-primary/10 active:scale-95"
+          >
+            Begin Your Journey
           </Link>
         </div>
 
+        {/* Grid Section */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {alumni.map((person, index) => (
             <div
               key={index}
-              className="bg-white/5 border border-white/10 rounded-[2rem] p-8 flex flex-col hover:bg-white/10 transition-all group"
+              className="group relative bg-slate-50 border border-slate-200/60 rounded-2xl p-8 flex flex-col transition-all duration-500 hover:bg-white hover:border-accent/50 hover:shadow-[0_20px_50px_rgba(10,37,64,0.1)] hover:-translate-y-2"
             >
-              <div className="mb-8 text-accent">
+              {/* Decorative Quote Mark */}
+              <div className="mb-6 text-accent opacity-30 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110 origin-left">
                 <QuoteIcon />
               </div>
 
-              <p className="text-white/80 italic leading-relaxed mb-10 flex-1 font-medium">
+              <p className="text-sm md:text-base leading-relaxed text-primary opacity-90 mb-10 flex-1 font-medium italic">
                 &quot;{person.quote}&quot;
               </p>
 
-              <div className="flex items-center gap-5 pt-8 border-t border-white/10">
-                <div className="w-14 h-14 bg-accent flex items-center justify-center text-primary font-black text-lg rounded-xl shadow-lg shadow-accent/20">
+              <div className="flex items-center gap-4 pt-6 border-t border-slate-200">
+                {/* Avatar Badge */}
+                <div className="w-12 h-12 bg-white border-2 border-accent text-primary flex items-center justify-center font-black text-base rounded-xl shadow-md transition-transform duration-500 group-hover:rotate-[10deg]">
                   {person.initials}
                 </div>
+                
                 <div>
-                  <p className="font-black text-white text-lg leading-none mb-1">{person.name}</p>
-                  <p className="text-secondary-light text-xs font-black uppercase tracking-widest mb-1">{person.role}</p>
-                  <div className="flex items-center gap-2 text-white/40">
-                    <FlagIcon />
-                    <span className="text-[10px] font-bold">{person.location}</span>
-                  </div>
+                  <p className="font-black text-primary text-lg leading-tight">
+                    {person.name}
+                  </p>
+                  <p className="text-secondary text-[10px] font-black uppercase tracking-widest mt-0.5">
+                    {person.role}
+                  </p>
+                  <p className="text-[10px] font-bold text-primary/50 mt-1">
+                    {person.location}
+                  </p>
                 </div>
               </div>
+
+              {/* Animated Bottom Line */}
+              <div className="mt-8 h-1 w-12 rounded-full bg-accent transition-all duration-500 group-hover:w-full" />
             </div>
           ))}
         </div>
