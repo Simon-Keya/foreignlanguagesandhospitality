@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Academics", href: "/academics" },
   { label: "Admissions", href: "/admissions" },
-  { label: "Careers", href: "/career-opportunities" }, // Added Careers here
+  { label: "Careers", href: "/career-opportunities" },
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
@@ -18,90 +18,84 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // NEW COLOR: Lighter Navy (#112D4E)
+  const lighterNavy = "bg-[#112D4E]"; 
+
   return (
     <>
-      {/* Institutional Top Bar */}
-      <div className="h-1.5 bg-gradient-to-r from-red-600 via-yellow-400 to-black sticky top-0 z-[70] w-full" />
+      <div className="h-1 bg-gradient-to-r from-red-600 via-yellow-400 to-[#112D4E] sticky top-0 z-[70] w-full" />
 
       <nav
-        className={`sticky top-1.5 z-50 transition-all duration-500 ${
+        className={`sticky top-1 z-50 transition-all duration-300 ${
           scrolled 
-            ? "bg-[#0A192F]/90 backdrop-blur-xl py-3 shadow-2xl border-b border-white/10" 
-            : "bg-[#0A192F] py-5"
+            ? `${lighterNavy}/95 backdrop-blur-md py-2 shadow-lg border-b border-white/5` 
+            : `${lighterNavy} py-4`
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           
-          {/* Logo Identity */}
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-lg">
-              <span className="text-[#0A192F] font-black text-lg tracking-tighter">IFL</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-md">
+              <span className="text-[#112D4E] font-black text-base tracking-tighter">IFL</span>
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-lg text-white leading-none tracking-tight">International Institute</span>
-              <span className="text-yellow-400 text-[10px] font-black mt-1 uppercase tracking-[0.2em]">Languages & Hospitality</span>
+              <span className="font-bold text-[15px] text-white leading-tight">International Institute</span>
+              <span className="text-yellow-400 text-[9px] font-bold uppercase tracking-widest">Languages & Hospitality</span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* Optimized Link Sizes */}
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-sm font-bold text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                className="px-3 py-1.5 text-[13px] font-semibold text-white/80 hover:text-white transition-all"
               >
                 {link.label}
               </Link>
             ))}
             
-            <div className="h-6 w-px bg-white/10 mx-4" />
+            <div className="h-4 w-px bg-white/10 mx-3" />
 
             <Link
               href="/admissions"
-              className="bg-yellow-400 text-[#0A192F] px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white transition-colors shadow-lg shadow-yellow-400/10"
+              className="bg-yellow-400 text-[#112D4E] px-5 py-2 rounded-lg text-[11px] font-black uppercase tracking-wider hover:bg-white transition-all shadow-sm"
             >
               Apply Now
             </Link>
           </div>
 
-          {/* Mobile Menu Trigger */}
           <button 
             onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden p-2 text-white"
           >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span className={`h-0.5 bg-current transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`h-0.5 bg-current transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
-              <span className={`h-0.5 bg-current transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            <div className="w-5 h-4 flex flex-col justify-between">
+              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
+              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`h-0.5 w-full bg-current transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
             </div>
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
-        <div className={`lg:hidden absolute top-full left-0 w-full bg-[#0A192F] border-t border-white/5 transition-all duration-500 overflow-hidden ${mobileOpen ? 'max-h-[100vh] border-b' : 'max-h-0'}`}>
-          <div className="p-8 flex flex-col gap-6">
+        {/* Mobile View */}
+        <div className={`lg:hidden absolute top-full left-0 w-full ${lighterNavy} border-t border-white/5 transition-all duration-300 overflow-hidden ${mobileOpen ? 'max-h-screen border-b' : 'max-h-0'}`}>
+          <div className="px-6 py-8 flex flex-col gap-5">
             {navLinks.map((link) => (
               <Link 
                 key={link.label} 
                 href={link.href} 
                 onClick={() => setMobileOpen(false)}
-                className="text-2xl font-black text-white/80 hover:text-yellow-400 transition-colors"
+                className="text-lg font-bold text-white/90"
               >
                 {link.label}
               </Link>
             ))}
-            <Link 
-              href="/admissions" 
-              className="bg-yellow-400 text-[#0A192F] p-5 rounded-2xl text-center font-black uppercase tracking-widest"
-            >
-              Start Application
-            </Link>
           </div>
         </div>
       </nav>
