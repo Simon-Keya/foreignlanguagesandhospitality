@@ -7,56 +7,52 @@ import { useState } from "react";
 
 const faqs = [
   {
+    id: "req",
     q: "What are the admission requirements?",
     a: "Requirements vary by program. For language courses, you need a KCSE certificate (minimum C plain) or equivalent to qualify for international placement standards.",
   },
   {
+    id: "sch",
     q: "Are there scholarship opportunities available?",
     a: "We offer need-based fee reduction and fully-funded Ausbildung placements for qualified students through our European partner networks.",
   },
   {
+    id: "dur",
     q: "How long are the programs?",
     a: "Language courses run from 3–12 months depending on the level (A1 to B2). Hospitality diplomas typically range from 12–24 months.",
   },
   {
+    id: "job",
     q: "Do you offer internship or job placements?",
     a: "Yes. We partner directly with employers in Germany, Austria, and Switzerland to ensure safe and legal transition into the workforce.",
   },
   {
+    id: "work",
     q: "Can I study while working?",
     a: "Yes. We offer flexible learning modules including evening, weekend, and hybrid online classes for working professionals.",
   },
   {
+    id: "supp",
     q: "What career support services do you provide?",
     a: "We provide comprehensive CV writing, Bewerbung coaching, interview prep, and full visa guidance as part of our placement package.",
   },
   {
+    id: "int",
     q: "Are the programs internationally recognized?",
     a: "Yes. Our language programs strictly follow the CEFR (Common European Framework of Reference for Languages) standards.",
   },
 ];
 
-const ChevronIcon = ({ open }: { open: boolean }) => (
-  <motion.svg
-    animate={{ rotate: open ? 180 : 0 }}
-    transition={{ duration: 0.3 }}
-    viewBox="0 0 24 24"
-    className="w-4 h-4 shrink-0 opacity-60"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </motion.svg>
-);
-
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  // Set to null so they are all closed by default, or "req" to have the first one open
+  const [activeId, setActiveId] = useState<string | null>("req");
+
+  const toggleFaq = (id: string) => {
+    setActiveId(activeId === id ? null : id);
+  };
 
   return (
-    <section className="py-20 bg-white relative">
+    <section className="py-20 bg-white relative z-10">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-12">
           <SectionTitle
@@ -67,36 +63,51 @@ export default function FAQ() {
 
         <div className="space-y-3">
           {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
+            const isOpen = activeId === faq.id;
+            
             return (
               <div
-                key={index}
-                className={`transition-all duration-300 rounded-xl overflow-hidden ${
-                  isOpen ? "bg-[#F8FAFC] ring-1 ring-[#0A2540]/10" : "bg-white border border-neutral-100"
+                key={faq.id}
+                className={`group transition-all duration-300 rounded-xl border ${
+                  isOpen 
+                    ? "bg-[#F8FAFC] border-[#0A2540]/20 shadow-sm" 
+                    : "bg-white border-neutral-100 hover:border-[#0A2540]/10"
                 }`}
               >
                 <button
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                  onClick={() => toggleFaq(faq.id)}
+                  type="button"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer focus:outline-none"
+                  aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-5">
-                    <span className={`text-[10px] font-black tracking-widest transition-colors ${isOpen ? 'text-secondary' : 'text-[#0A2540]/30'}`}>
+                    <span className={`text-[10px] font-black tracking-widest transition-colors ${
+                      isOpen ? 'text-secondary' : 'text-[#0A2540]/30'
+                    }`}>
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className={`font-bold text-base md:text-[17px] tracking-tight ${isOpen ? 'text-[#0A2540]' : 'text-[#0A2540]/70'}`}>
+                    <span className={`font-bold text-base md:text-[17px] tracking-tight transition-colors ${
+                      isOpen ? 'text-[#0A2540]' : 'text-[#0A2540]/70 group-hover:text-[#0A2540]'
+                    }`}>
                       {faq.q}
                     </span>
                   </div>
-                  <ChevronIcon open={isOpen} />
+                  
+                  {/* Icon */}
+                  <div className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+                    <svg className="w-5 h-5 text-[#0A2540]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </button>
 
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div className="px-6 pb-6 ml-[3.25rem]">
                         <p className="text-sm md:text-base text-neutral-600 leading-relaxed border-l-2 border-secondary/30 pl-5">
@@ -111,9 +122,8 @@ export default function FAQ() {
           })}
         </div>
 
-        {/* Admissions Help Desk Card - Standardized size and Navy colors */}
+        {/* Admissions Help Desk Card */}
         <div className="mt-16 bg-[#0A2540] rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 text-white shadow-xl relative overflow-hidden">
-          {/* Subtle accent glow */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-secondary opacity-10 blur-[50px]" />
           
           <div className="flex-1 text-center md:text-left relative z-10">
