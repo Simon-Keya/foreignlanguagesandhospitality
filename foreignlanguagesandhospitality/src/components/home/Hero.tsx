@@ -3,8 +3,15 @@
 import Link from "next/link";
 
 export default function Hero() {
+  // Logic to handle the download from the local /docs folder
   const handleDownload = () => {
-    window.open('/docs/brochure.pdf', '_blank');
+    // This points to public/docs/brochure.pdf
+    const link = document.createElement('a');
+    link.href = '/docs/brochure.pdf';
+    link.download = 'IFL_Brochure.pdf'; // Suggests a filename for the user
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
